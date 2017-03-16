@@ -47,7 +47,7 @@ services:
 
   longhorn-orc-lb:
     image: rancher/lb-service-haproxy:v0.6.0
-    expose:
+    ports:
     - 7000:7000/tcp
     labels:
       io.rancher.scheduler.global: 'true'
