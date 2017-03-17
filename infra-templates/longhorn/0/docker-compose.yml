@@ -46,7 +46,7 @@ services:
     tty: true
 
   longhorn-orc-lb:
-    image: rancher/lb-service-haproxy:v0.6.0
+    image: rancher/lb-service-haproxy:v0.6.2
     ports:
     - 7000:7000/tcp
     labels:
