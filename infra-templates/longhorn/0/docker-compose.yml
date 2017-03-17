@@ -37,10 +37,10 @@ services:
     - longhorn-binary   # /usr/local/bin
     environment:
       RANCHER_DEBUG: ${RANCHER_DEBUG}
-      LONGHORN_IMAGE: rancher/longhorn:dc31bcb
+      LONGHORN_IMAGE: rancher/longhorn:5c4b8bb
 
   longhorn-binary:
-    image: rancher/longhorn:dc31bcb
+    image: rancher/longhorn:5c4b8bb
     command: [sh]
     stdin_open: true
     tty: true
