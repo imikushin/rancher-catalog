@@ -128,11 +128,13 @@ kubernetes:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
         {{- end }}
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.sidekicks: kube-hostname-updater
     command:
         - kube-apiserver
+        - --apiserver-count=2
         - --storage-backend=etcd2
         - --service-cluster-ip-range=10.43.0.0/16
         - --etcd-servers=http://etcd.kubernetes.rancher.internal:2379
@@ -187,10 +189,11 @@ scheduler:
         - --master=http://kubernetes.kubernetes.rancher.internal
         - --address=0.0.0.0
     image: rancher/k8s:v1.6.2-rancher3-3
-    {{- if eq .Values.CONSTRAINT_TYPE "required" }}
     labels:
+        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
         {{- end }}
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     links:
         - kubernetes
 
@@ -208,6 +211,7 @@ controller-manager:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
         {{- end }}
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
     links:
