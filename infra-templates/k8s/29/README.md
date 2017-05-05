@@ -1,4 +1,4 @@
-## Kubernetes 1.6.1
+## Kubernetes 1.6.2
 
 ### Upgrading to this Version
 
@@ -9,6 +9,12 @@ If you are trying to create resiliency planes by labeling your hosts to separate
 ### Plane Isolation
 
 If you set the "Plane Isolation" field to `required`, the host labels, `compute=true`, `orchestration=true` and `etcd=true`, are required on your hosts in order for Kubernetes to successfully launch.
+
+Daemon Sets will run their pods on all nodes.
+
+### HA
+
+Kubernetes will automatically run in HA configuration if there are 2 or more nodes available for its master components (api, controller-manager, scheduler) to run on.
 
 ### KubeDNS
 
